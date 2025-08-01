@@ -26,7 +26,7 @@ deg = DAG(
 )
 
 task1 = BashOperator(
-    task_id = 'print_hello'
+    task_id = 'print_hello',
     bash_command = 'echo "Hello, World!, The date and times are:"',
     dag = dag,
 )
