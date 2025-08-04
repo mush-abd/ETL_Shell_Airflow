@@ -59,7 +59,7 @@ default_args = {
     'owner' : 'Musharraf', 
     'start_date' : days_ago(0),
     'email' : ['datawithmush@gmail.com'],
-    'retry_delay' : timedelta(minutes=5)
+    'retry_delay' : timedelta(minutes=5),
 }
 
 # DAG definition
@@ -75,28 +75,32 @@ mydag = DAG (
 
 extract_call = PythonOperator(
     task_id = 'extract',
-    python_callable = extract_call,
+    python_callable = extract,
     dag = mydag
 )
 
 transform_call = PythonOperator(
     task_id = 'transform',
-    python_callable = transform_call,
+    python_callable = transform,
     dag = mydag
 )
 
 load_call = PythonOperator(
     task_id = 'load',
-    python_callable = load_call,
+    python_callable = load,
     dag = mydag
 
 )
 validate_call = PythonOperator(
     task_id = 'validate',
-    python_callable = validate_call,
+    python_callable = validate,
     dag = mydag
 )
 
 # Pipeline
 
-extract_call >> transform_call >> load_call 
+extract_call >> transform_call >> load_call >> validate_call
+# This will ensure that the tasks are executed in the order: extract -> transform -> load -> validate
+
+if __name__ == "__main__":
+    mydag.cli()  # This allows the DAG to be run from the command line for testing purposes.
