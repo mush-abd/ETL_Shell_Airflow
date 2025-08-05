@@ -1,3 +1,6 @@
+# THis is a DAG that extracts, transforms, and loads server logs using BashOperator in Apache Airflow.
+#
+
 #python library imports
 
 import airflow
