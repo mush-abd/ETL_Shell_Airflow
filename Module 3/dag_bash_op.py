@@ -13,7 +13,7 @@ from airflow.utils.dates import days_ago
 default_args = {
     'owner': 'your_name_here',
     'start_date': days_ago(0),
-    'email': ['your_email_here'],
+    'email': ['datawithmush@gmail.com'],
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
